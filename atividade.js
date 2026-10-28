@@ -1,7 +1,36 @@
 const prompt = require("prompt-sync")();
 
 function criarMenu(){
+    opc = 0;
+    novoDado = "";
+    
+    
+    while(opc != 9){
     console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n");
+    opc = Number(prompt("Escolha uma opção: "));
+    
+    switch (opc){
+        case 1:
+            listarTodos(lista);
+            break;
+        case 2:
+            novoDado = prompt("Insira o Dado a se inserir: ");
+            inserirFim(lista,novoDado);
+            break;
+        case 3:
+            let posicaoE = Number(prompt("Insira a Posição que deseja inserir o dado: "));
+            novoDado = prompt("Insira o Dado a se inserir: ");
+            inserirPosicao(lista,novoDado);
+            break;
+        case 9:
+            console.log("Saindo do Programa...");
+            break;
+        default:
+            console.log("Opção Invalida\n");
+            break;
+    }
+}
+
 }
 
 function criarNo(dado){
@@ -49,33 +78,7 @@ function inserirPosicao(lista,dado, posicao){
     atual.proximo = novo;
 }
 
-opc = 0;
-novoDado = "";
+
 
 lista = criarLista();
-
-while(opc != 9){
-    criarMenu();
-    opc = Number(prompt("Escolha uma opção: "));
-    
-    switch (opc){
-        case 1:
-            listarTodos(lista);
-            break;
-        case 2:
-            novoDado = prompt("Insira o Dado a se inserir: ");
-            inserirFim(lista,novoDado);
-            break;
-        case 3:
-            let posicaoE = Number(prompt("Insira a Posição que deseja inserir o dado: "));
-            novoDado = prompt("Insira o Dado a se inserir: ");
-            inserirPosicao(lista,novoDado);
-            break;
-        case 9:
-            console.log("Saindo do Programa...");
-            break;
-        default:
-            console.log("Opção Invalida\n");
-            break;
-    }
-}
+criarMenu();
