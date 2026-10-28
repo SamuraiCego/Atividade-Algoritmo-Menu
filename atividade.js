@@ -5,8 +5,8 @@ function criarMenu(){
     novoDado = "";
     
     
-    while(opc != 9){
-    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n9 - Sair do Programa\n");
+    while(opc != 4){
+    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n4 - Sair do Programa\n");
     opc = Number(prompt("Escolha uma opção: "));
     
     switch (opc){
@@ -22,7 +22,7 @@ function criarMenu(){
             novoDado = prompt("Insira o Dado a se inserir: ");
             inserirPosicao(lista,novoDado);
             break;
-        case 9:
+        case 4:
             console.log("Saindo do Programa...");
             break;
         default:
