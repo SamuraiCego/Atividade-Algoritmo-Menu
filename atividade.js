@@ -6,7 +6,7 @@ function criarMenu(){
     
     
     while(opc != 9){
-    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n");
+    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n9 - Sair do Programa\n");
     opc = Number(prompt("Escolha uma opção: "));
     
     switch (opc){
