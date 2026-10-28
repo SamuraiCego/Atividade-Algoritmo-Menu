@@ -20,7 +20,7 @@ function criarMenu(){
         case 3:
             let posicaoE = Number(prompt("Insira a Posição que deseja inserir o dado: "));
             novoDado = prompt("Insira o Dado a se inserir: ");
-            inserirPosicao(lista,novoDado);
+            inserirPosicao(lista,novoDado, posicaoE);
             break;
         case 4:
             console.log("Saindo do Programa...");
@@ -43,6 +43,10 @@ function criarLista(){
 
 function listarTodos(lista){
     let atual = lista.inicio;
+    if(lista.inicio == null){
+        console.log("Lista Vazia.\n");
+        return;
+    }
     while(atual != null){
         console.log(atual.dado);
         atual = atual.proximo;
@@ -63,7 +67,19 @@ function inserirFim(lista,dado){
 }
 
 function inserirPosicao(lista,dado, posicao){
+    novo = criarNo(dado);
+    tamanho = contarlista(lista);
+    if(lista.inicio == null){
+        lista.inicio = novo;
+        return;
+    }
+    if(posicao < 0 || posicao > tamanho){
+        console.log("Posição Invalida \n");
+        return;
+    }
     if(posicao == 0){
+        novo.proximo = lista.inicio;
+        lista.inicio = novo;
         return;
     }
     let atual = lista.inicio;
@@ -73,12 +89,20 @@ function inserirPosicao(lista,dado, posicao){
     if (atual == null){
         return;
     }
-    novo = criarNo(dado);
+    
     novo.proximo = atual.proximo;
     atual.proximo = novo;
 }
 
-
+function contarlista(lista){
+    let cont = 0;
+    let atual = lista.inicio
+    while(atual != null){
+        cont++;
+        atual = atual.proximo;
+    }
+    return cont;
+}
 
 lista = criarLista();
 criarMenu();
