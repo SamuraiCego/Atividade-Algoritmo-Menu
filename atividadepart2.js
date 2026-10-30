@@ -6,32 +6,40 @@ function criarMenu(){
     
     
     while(opc != 7){
-    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n4 - Excluir posição\n5 - Atualizar posição\n6 - Buscar Valor\n7 - Sair do Programa");
+    console.log("---Menu de Opções---\n");
+    console.log("1 - Listar Todos\n2 - Inserir no final\n3 - Inserir na posição\n4 - Excluir posição\n5 - Atualizar posição\n6 - Buscar Valor\n7 - Sair do Programa\n");
     opc = Number(prompt("Escolha uma opção: "));
+    console.log("\n");
     
     switch (opc){
         case 1:
+            console.log("--- Opção Escolhida: Listar Todos ---\n")
             listarTodos(lista);
             break;
         case 2:
+           console.log("--- Opção Escolhida: Inserir no Final ---\n")
             novoDado = prompt("Insira o Dado a se inserir: ");
             inserirFim(lista,novoDado);
             break;
         case 3:
+            console.log("--- Opção Escolhida: Inserir na Posição ---\n")
             let posicaoI = Number(prompt("Insira a Posição que deseja inserir o dado: "));
             novoDado = prompt("Insira o Dado a se inserir: ");
             inserirPosicao(lista,novoDado, posicaoI);
             break;
         case 4:
+            console.log("--- Opção Escolhida: Excluir Posição ---\n")
             let posicaoE = Number(prompt("Insira a Posição que deseja excluir: "));
             excluirPosicao(lista, posicaoE);
             break;
         case 5:
+            console.log("--- Opção Escolhida: Atualizar Posição ---\n")
             let posicaoA = Number(prompt("Insira a Posição que deseja atualizar: "));
             novoDado = prompt("Insira o  Dado a se atualizar: ");
             atualizarPosicao(lista, posicaoA, novoDado);
             break;
         case 6:
+            console.log("--- Opção Escolhida: Buscar Valor ---\n")
             let dadoB = prompt("Insira o Dado a se Buscar: ");
             buscarValor(lista,dadoB);
             break;
@@ -57,6 +65,7 @@ function criarLista(){
 function listarTodos(lista){
     let atual = lista.inicio;
     if(lista.inicio == null){
+        console.log("--- Erro ao Executar ---\n")
         console.log("Lista Vazia.\n");
         return;
     }
@@ -87,6 +96,7 @@ function inserirPosicao(lista,dado, posicao){
         return;
     }
     if(posicao < 0 || posicao > tamanho){
+        console.log("--- Erro ao Executar --- \n")
         console.log("Posição Invalida \n");
         return;
     }
@@ -117,19 +127,31 @@ function contarlista(lista){
     return cont;
 }
 
+function validarPosicao(lista,posicao){
+    let atual = lista.inicio
+    for(let i = 0; i < posicao; i++){
+        atual = atual.proximo;
+    }
+    if(atual != null){
+        return true;
+    }
+    return false;
+}
+
 function excluirPosicao(lista,posicao){
     let anterior = lista.inicio;
-    let tamanhoE = contarlista(lista);
+    let validade = validarPosicao(lista,posicao);
     if(posicao == 0){
         lista.inicio = anterior.proximo;
         return;
     }
-    if(posicao < 0 || posicao > tamanhoE - 1){
+    if(posicao < 0 || validade == false){
+        console.log("--- Erro ao Executar ---\n")
         console.log("Posição Invalida.\n");
         return;
     }
     
-    for(let i = 0; i < posicao - 2 && anterior != null; i++){
+    for(let i = 0; i < posicao - 1 && anterior != null; i++){
         anterior = anterior.proximo;
     }
     let excluir = anterior.proximo;
@@ -142,11 +164,14 @@ function excluirPosicao(lista,posicao){
 
 function atualizarPosicao(lista,posicao,novoDado){
     let atual = lista.inicio;
-    let tamanhoA = contarlista(lista);
+    let validade = validarPosicao(lista,posicao);
+
     if(novoDado == "" || novoDado == " "){
+        console.log("--- Erro ao Executar ---\n")
         return console.log("Dado Invalido.\n");
     }
-    if(posicao < 0 || posicao > tamanhoA - 1){
+    if(posicao < 0 || validade == false){
+        console.log("--- Erro ao Executar ---\n")
         console.log("Posição Invalida \n");
         return;
     }
@@ -162,9 +187,8 @@ function atualizarPosicao(lista,posicao,novoDado){
 
 function buscarValor(lista,dadoB){
     let atual = lista.inicio;
-    let tamanhoB = contarlista(lista);
 
-    for(let i = 0; i < tamanhoB && atual != null; i++){
+    while(atual != null){
         if(atual.dado == dadoB){
             console.log(`O dado se encontra na Posição ${i}`);
             return;
@@ -172,6 +196,7 @@ function buscarValor(lista,dadoB){
             atual = atual.proximo;
         }
     }
+    console.log("--- Erro ao Executar ---\n")
     return console.log("Dado não encontrado.\n");
 
 }
